@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaChartPie, FaProjectDiagram } from "react-icons/fa";
-import CommitCalendar from "../components/CommitCalendar";
-import GitHubStats from "../components/GitHubStatus";
-import LanguageGraph from "../components/LanguageGraph";
-import ProjectCard from "../components/ProjectCard";
-import { fetchAllRepositories } from "../utils/github";
+import LanguageGraph from "../features/home/components/LanguageGraph";
+import CommitCalendar from "../features/project/components/CommitCalendar";
+import GitHubStats from "../features/project/components/GitHubStatus";
+import ProjectCard from "../features/project/components/ProjectCard";
+import { fetchAllRepositories } from "../shared/api/github";
 
 export const fetchOrg = async (orgs) => {
   const res = await fetch(`https://api.github.com/orgs/${orgs}/repos`);
@@ -31,11 +31,11 @@ export default function Projects() {
   useEffect(() => {
     const loadRepos = async () => {
       try {
-        // Fetch personal and organization repositories
-        const [personalRepos, orgRepos] = await Promise.all([
-          fetchAllRepositories("punhnahk"),
-          fetchOrg("Team1-DevPlus"), // Now correctly returns an array
-        ]);
+        // Pass queryKey as an array
+        const personalRepos = await fetchAllRepositories({
+          queryKey: [null, "punhnahk"],
+        });
+        const orgRepos = await fetchOrg("Team1-DevPlus");
 
         if (!Array.isArray(orgRepos)) {
           console.error(
@@ -45,7 +45,6 @@ export default function Projects() {
           return;
         }
 
-        // Merge and filter based on selectedRepos
         const allRepos = [...personalRepos, ...orgRepos];
         const filteredRepos = allRepos.filter((repo) =>
           selectedRepos.includes(repo.name)
@@ -153,18 +152,18 @@ export default function Projects() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
-              <div>
+              <div className="flex flex-col h-full">
                 <h2 className="text-2xl font-semibold mb-4">
                   Language Distribution
                 </h2>
-                <div className="bg-gray-800 p-6 rounded-lg">
+                <div className="bg-gray-800 p-6 rounded-lg flex-1">
                   <LanguageGraph repos={repos} />
                 </div>
               </div>
 
-              <div>
+              <div className="flex flex-col h-full">
                 <h2 className="text-2xl font-semibold mb-4">GitHub Stats</h2>
-                <div className="bg-gray-800 p-6 rounded-lg">
+                <div className="bg-gray-800 p-6 rounded-lg flex-1 flex items-center justify-center">
                   <GitHubStats username="punhnahk" />
                 </div>
               </div>

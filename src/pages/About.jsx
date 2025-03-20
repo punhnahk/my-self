@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import ava from "../assets/avatar.jpg";
+import ava from "../shared/assets/avatar.jpg";
 
 export default function About() {
   const fadeInUp = {

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import pdf from "../assets/Intern_CV_Phung Huu Minh Khanh.pdf";
+import pdf from "../shared/assets/Intern_CV_Phung Huu Minh Khanh.pdf";
 
 export default function Resume() {
   const fadeInUp = {

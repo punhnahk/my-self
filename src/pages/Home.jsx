@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { FaGitAlt, FaJs, FaNodeJs, FaReact } from "react-icons/fa";
 import { SiMongodb, SiTailwindcss } from "react-icons/si";
 import { Link } from "react-router-dom";
-import ava from "../assets/avatar.jpg";
-import Type from "../components/Type";
+import Type from "../features/home/components/Type";
+import ava from "../shared/assets/avatar.jpg";
 
 const skills = [
   { name: "React", icon: <FaReact className="text-blue-400 text-3xl" /> },

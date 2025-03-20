@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { fetchUserStats } from "../utils/github";
+import { fetchUserStats } from "../../../shared/api/github";
 
 export default function GitHubStats({ username }) {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!username) return;
     const loadStats = async () => {
       try {
-        const data = await fetchUserStats(username);
+        const data = await fetchUserStats({
+          queryKey: [null, username],
+        });
         setStats(data);
       } catch (error) {
         console.error("Error fetching user stats:", error);
@@ -16,7 +19,6 @@ export default function GitHubStats({ username }) {
         setLoading(false);
       }
     };
-
     loadStats();
   }, [username]);
 
@@ -43,14 +45,13 @@ export default function GitHubStats({ username }) {
 
   const statItems = [
     { icon: "⭐", label: "Total Stars", value: stats.totalStars },
-    { icon: "🍴", label: "Total Forks", value: stats.totalForks },
     { icon: "👥", label: "Followers", value: stats.followers },
     { icon: "👤", label: "Following", value: stats.following },
     { icon: "📦", label: "Repositories", value: stats.publicRepos },
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-4 gap-4">
       {statItems.map((item, index) => (
         <div key={index} className="bg-gray-700 p-4 rounded-lg text-center">
           <div className="text-xl mb-1">{item.icon}</div>
