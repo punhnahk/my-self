@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -21,10 +23,23 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null); // Reset status on new submission
 
-    // Simulate form submission
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const templateParams = {
+        from_name: formState.name,
+        from_email: formState.email,
+        subject: formState.subject,
+        message: formState.message,
+      };
+
+      await emailjs.send(
+        "service_noel2003",
+        "template_2u4pa2n",
+        templateParams,
+        "gCqXHMy15x2V5vxb9"
+      );
+
       setSubmitStatus("success");
       setFormState({
         name: "",
@@ -33,7 +48,8 @@ export default function Contact() {
         message: "",
       });
     } catch (error) {
-      setSubmitStatus("error", error);
+      console.error("EmailJS Error:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
