@@ -12,8 +12,8 @@ import { fetchAllRepositories } from "../shared/api/github";
 export const fetchOrg = async (orgs) => {
   const res = await fetch(`https://api.github.com/orgs/${orgs}/repos`);
   const repositories = await res.json();
-
-  return repositories; // Return the array directly instead of wrapping in { props: { repositories } }
+  console.log(repositories);
+  return repositories;
 };
 
 export default function Projects() {
@@ -26,6 +26,7 @@ export default function Projects() {
     "final",
     "chuctet2025",
     "noel",
+    "ngocanh",
   ];
 
   useEffect(() => {

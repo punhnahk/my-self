@@ -100,7 +100,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 px-8 md:px-20">
+      <section className="py-22 px-8 md:px-20">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">
             Skills & Technologies

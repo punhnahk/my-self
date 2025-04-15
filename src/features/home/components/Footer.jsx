@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 text-gray-400">
-      <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-gray-900  border-gray-800 text-gray-400">
+      <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row justify-between items-center">
           {/* Brand & Copyright */}
           <div className="text-center sm:text-left">

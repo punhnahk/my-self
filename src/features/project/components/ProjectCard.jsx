@@ -9,6 +9,7 @@ const projectImages = {
   final:
     "https://www.shutterstock.com/image-vector/super-sale-header-banner-design-260nw-1663164736.jpg",
   DevPlus_QuizWebsiteAI: "/quiz.png",
+  ngocanh: "../../../../public/ngocanh.png",
 };
 
 export default function ProjectCard({ project }) {
